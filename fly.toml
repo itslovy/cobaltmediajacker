@@ -1,0 +1,30 @@
+app = "mediajacker-cobalt-api"
+primary_region = "sea"  # Seattle — close to Surrey BC. Change as needed.
+
+[build]
+  image = "ghcr.io/imputnet/cobalt:11"
+
+[env]
+  API_URL = "https://mediajacker-cobalt-api.fly.dev/"
+  CORS_WILDCARD = "1"  # Allows your Lovable frontend to call the API
+
+[[services]]
+  internal_port = 9000
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+[checks]
+  [checks.alive]
+    type = "http"
+    interval = "30s"
+    timeout = "5s"
+    path = "/"
+    port = 9000
