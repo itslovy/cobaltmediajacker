@@ -1,23 +1,23 @@
-app = "mediajacker-cobalt-api"
-primary_region = "iad"
+# fly.toml app configuration file generated for mediajacker-cobalt-api on 2026-04-03T22:54:17Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'mediajacker-cobalt-api'
+primary_region = 'iad'
 
 [build]
-  dockerfile = "Dockerfile"
-
-[env]
-  API_URL = "https://mediajacker-cobalt-api.fly.dev/"
-  API_PORT = "9000"
-  API_LISTEN_ADDRESS = "0.0.0.0"
 
 [http_service]
-  internal_port = 9000
+  internal_port = 8080
   force_https = true
-  auto_stop_machines = "stop"
+  auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 1
-  processes = ["app"]
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 1024
